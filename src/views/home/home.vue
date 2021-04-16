@@ -2,10 +2,14 @@
   <div id="homeBox">
     <div class="home_NavBar"><nav-bar></nav-bar></div>
     <!-- <div>{{banner.image}}</div> -->
-    <home-swiper class="home_swiper" :banners='banners'/>
-    <home-recommend :recommends='recommends'/>
-    <tab-control class="tab_control" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
-    <home-list :goodsList="goods[currentType].list"/>
+    <b-scroll ref="Bscroll" class="Bscroll">
+      <home-swiper class="home_swiper" :banners='banners'/>
+      <home-recommend :recommends='recommends'/>
+      <tab-control class="tab_control" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
+      <home-list :goodsList="goods[currentType].list"/>
+    </b-scroll>
+    <back-top @click.native="BacktopClick" />
+    
   </div>
 </template>
 
@@ -16,6 +20,8 @@ import HomeRecommend from './childComps/HomerecomendView'
 import HomeSwiper from "./childComps/HomeSwiper"
 import TabControl from "components/content/tabControl/TabControl"
 import HomeList from "components/content/goods/goodslist"
+import BScroll from "components/content/bscroll/bscroll"
+import BackTop from "components/content/backtop/backtop"
 
 export default {
   data(){
@@ -35,7 +41,9 @@ export default {
     HomeSwiper, 
     HomeRecommend,
     TabControl,
-    HomeList
+    HomeList,
+    BScroll,
+    BackTop
   },
   created(){
     this.getHomeMultidata()
@@ -75,6 +83,9 @@ export default {
           this.currentType='sell'
           break
       }
+    },
+    BacktopClick(){
+      this.$refs.Bscroll.scrollTo(0,0)
     }
   }
 }
@@ -94,5 +105,10 @@ export default {
 .tab_control{
   position: sticky;
   top: 44px;
+}
+.Bscroll{
+  height: calc(100vh - 44px);
+  overflow: hidden;
+
 }
 </style>
