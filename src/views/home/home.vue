@@ -2,13 +2,18 @@
   <div id="homeBox">
     <div class="home_NavBar"><nav-bar></nav-bar></div>
     <!-- <div>{{banner.image}}</div> -->
-    <b-scroll ref="Bscroll" class="Bscroll">
+    <b-scroll ref="Bscroll" class="Bscroll" 
+    :probe-type="3" 
+    @scroll="scroll"
+    :pull-upload="true"
+    @pullingUp="pullingUp"
+    >
       <home-swiper class="home_swiper" :banners='banners'/>
       <home-recommend :recommends='recommends'/>
       <tab-control class="tab_control" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
       <home-list :goodsList="goods[currentType].list"/>
     </b-scroll>
-    <back-top @click.native="BacktopClick" />
+    <back-top @click.native="BacktopClick" v-show="backisShow" />
     
   </div>
 </template>
@@ -33,7 +38,8 @@ export default {
             'new':{page:0,list:[]},
             'sell':{page:0,list:[]},
         },
-      currentType:"pop"
+      currentType:"pop",
+      backisShow:false
     }
   },
   components:{
@@ -67,6 +73,8 @@ export default {
        getHomeGoods(type,page).then(res=>{
       this.goods[type].list.push(...res.data.list)
       this.goods[type].page += 1
+      this.$refs.Bscroll.finishPullUp()
+
     })
     },
     //事件监听
@@ -86,6 +94,15 @@ export default {
     },
     BacktopClick(){
       this.$refs.Bscroll.scrollTo(0,0)
+    },
+    scroll(position){
+      // console.log(position.y);
+      this.backisShow= (-position.y) > 1500
+    },
+    pullingUp(){
+      console.log(123);
+      this.getHomeGoods(this.currentType)
+      this.$refs.Bscroll.scroll.refresh()
     }
   }
 }
