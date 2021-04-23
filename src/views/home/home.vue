@@ -27,6 +27,7 @@ import TabControl from "components/content/tabControl/TabControl"
 import HomeList from "components/content/goods/goodslist"
 import BScroll from "components/content/bscroll/bscroll"
 import BackTop from "components/content/backtop/backtop"
+import { debounce } from "common/utils"
 
 export default {
   data(){
@@ -57,9 +58,26 @@ export default {
     this.getHomeGoods("new")
     this.getHomeGoods("sell")
     
+  },
+  mounted(){
+    const  refresh = debounce(this.$refs.Bscroll.refresh,200)
+    this.$bus.$on('imageOnload',()=>{
+      refresh()
+    })  
    
   },
+  destroyed(){
+    console.log(666);
+  },
+  activated(){
+    console.log(777);
+  },
+  deactivated(){
+    console.log(888);
+
+  },
   methods:{
+    
     //网络请求相关
     getHomeMultidata(){
       getHomeMultidata().then(res=>{
@@ -74,10 +92,10 @@ export default {
       this.goods[type].list.push(...res.data.list)
       this.goods[type].page += 1
       this.$refs.Bscroll.finishPullUp()
+      })
 
-    })
     },
-    //事件监听
+    //事件监听-------------
     tabClick(index){
       console.log(index);
       switch(index){
@@ -100,10 +118,12 @@ export default {
       this.backisShow= (-position.y) > 1500
     },
     pullingUp(){
-      console.log(123);
+      // console.log(123);
       this.getHomeGoods(this.currentType)
-      this.$refs.Bscroll.scroll.refresh()
-    }
+      this.$refs.Bscroll.refresh()
+      
+    },
+    
   }
 }
 </script>

@@ -1,11 +1,11 @@
 <template>
   <div class="goodsitem">
-      <img :src="goodsItem .show.img" alt="">
+      <img :src="goodsItem .show.img" alt="" @load="imageLoad" @click="imgClick">
       <div class="goods-info">
           <p>{{goodsItem.title}}</p>
           <div class="goods-price">
                <span>原价{{goodsItem.orgPrice}}</span>
-                <img src="~assets/img/common/collect.svg" alt="">
+                <img src="~assets/img/common/collect.svg" alt="" >
              <span class="newprice">现价{{goodsItem.price}}</span>
           </div>
       </div>
@@ -21,6 +21,14 @@ export default {
                 return{}
             }
         },
+    },
+    methods:{
+        imageLoad(){
+            this.$bus.$emit("imageOnload")
+        },
+        imgClick(){
+            this.$router.push("/detail/" + this.goodsItem.iid)
+        }
     }
 }
 </script>

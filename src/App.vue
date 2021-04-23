@@ -1,6 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" >
+    <keep-alive exclude="detail">
     <router-view></router-view>
+    </keep-alive>
     <main-tar-bar></main-tar-bar>
   </div>
 </template>
@@ -13,7 +15,8 @@ export default {
   name: 'App',
   components: {
     MainTarBar
-  }
+  },
+  
 }
 </script>
 

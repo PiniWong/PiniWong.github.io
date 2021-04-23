@@ -18,6 +18,7 @@ export default {
     width: 100%;
     height: 44px;
     line-height: 44px;
+    box-shadow: 0px 1px 2px rgba(139, 139, 139, 0.596)
 }
 .left,.right{
     flex: 1;

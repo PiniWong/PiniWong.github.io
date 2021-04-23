@@ -8,6 +8,8 @@ const Shop = () =>
     import ('../views/shop/shop')
 const User = () =>
     import ('../views/user/user')
+const Detail = () => 
+   import('../views/detail/detail')
 
 
 Vue.use(VueRouter)
@@ -31,6 +33,10 @@ const routes = [{
     {
         path: "/user",
         component: User
+    },
+    {
+        path: "/detail/:iid",
+        component: Detail
     }
 ]
 const router = new VueRouter({
