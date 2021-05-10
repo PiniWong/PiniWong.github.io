@@ -8,40 +8,64 @@ const Shop = () =>
     import ('../views/shop/shop')
 const User = () =>
     import ('../views/user/user')
-const Detail = () => 
-   import('../views/detail/detail')
+const Detail = () =>
+    import ('../views/detail/detail')
 
 
 Vue.use(VueRouter)
 
 const routes = [{
         path: "",
-        redirect: "/home"
+        redirect: "/home",
+        meta: {
+            title: '首页'
+        }
     },
     {
         path: "/home",
-        component: Home
+        component: Home,
+        meta: {
+            title: 'MoMO'
+        }
     },
     {
         path: "/category",
-        component: Category
+        component: Category,
+        meta: {
+            title: '分类'
+        }
     },
     {
         path: "/shop",
-        component: Shop
+        component: Shop,
+        meta: {
+            title: '购物车'
+        }
     },
     {
         path: "/user",
-        component: User
+        component: User,
+        meta: {
+            title: '用户'
+        }
     },
     {
         path: "/detail/:iid",
-        component: Detail
+        component: Detail,
+        meta: {
+            title: '商品详情'
+        }
     }
 ]
 const router = new VueRouter({
     routes,
     mode: 'history'
+})
+
+router.beforeEach((to, from, next) => {
+    // console.log(from);
+    document.title = to.meta.title
+    next()
 })
 
 export default router

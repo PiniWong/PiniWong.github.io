@@ -16,7 +16,7 @@ export default {
         goodsList:{
             type:Array,
             default(){
-                return{}
+                return[]
             }
         }
     }

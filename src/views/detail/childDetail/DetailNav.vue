@@ -21,12 +21,20 @@ export default {
             default(){
                 return[]
             }
+        },
+        NavindexClick:{
+            type:Number
         }
     },
     data(){
         return{
           currenindex:0,
           SwiperImg:""
+        }
+    },
+    updated(){
+        if(this.NavindexClick){
+                this.currenindex=this.NavindexClick
         }
     },
     components:{
@@ -38,6 +46,7 @@ export default {
         },
         Nav_click(index){
             this.currenindex = index
+            this.$emit("navClick",index)
         },
     }
     

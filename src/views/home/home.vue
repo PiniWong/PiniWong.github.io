@@ -1,6 +1,9 @@
 <template>
   <div id="homeBox">
     <div class="home_NavBar"><nav-bar></nav-bar></div>
+    <tab-control v-show="tabFlexChange"  ref="tabControl2" class="tab_control2" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
+
+
     <!-- <div>{{banner.image}}</div> -->
     <b-scroll ref="Bscroll" class="Bscroll" 
     :probe-type="3" 
@@ -8,9 +11,9 @@
     :pull-upload="true"
     @pullingUp="pullingUp"
     >
-      <home-swiper class="home_swiper" :banners='banners'/>
-      <home-recommend :recommends='recommends'/>
-      <tab-control class="tab_control" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
+      <home-swiper class="home_swiper" ref="HomeSwiper" :banners='banners'/>
+      <home-recommend :recommends='recommends' ref="HomeRecommend" />
+      <tab-control  ref="tabControl1" class="tab_control" :titles="['流行','新款','精选']" @tabClick="tabClick"  />
       <home-list :goodsList="goods[currentType].list"/>
     </b-scroll>
     <back-top @click.native="BacktopClick" v-show="backisShow" />
@@ -40,7 +43,9 @@ export default {
             'sell':{page:0,list:[]},
         },
       currentType:"pop",
-      backisShow:false
+      backisShow:false,
+      tabFlexChange:false
+
     }
   },
   components:{
@@ -61,19 +66,23 @@ export default {
   },
   mounted(){
     const  refresh = debounce(this.$refs.Bscroll.refresh,200)
-    this.$bus.$on('imageOnload',()=>{
+    this.$bus.$on('HomeimgUpload',()=>{
       refresh()
-    })  
+    })
+    
    
   },
+  updated(){
+    // console.log(this.$refs.HomeSwiper.$el.offsetHeight);
+  },
   destroyed(){
-    console.log(666);
+    // console.log(666);
   },
   activated(){
-    console.log(777);
+    // console.log(777);
   },
   deactivated(){
-    console.log(888);
+    // console.log(888);
 
   },
   methods:{
@@ -81,7 +90,7 @@ export default {
     //网络请求相关
     getHomeMultidata(){
       getHomeMultidata().then(res=>{
-     console.log(res);
+    //  console.log(res);
      this.banners = res.data.banner.list
      this.recommends = res.data.recommend.list
     })
@@ -97,7 +106,7 @@ export default {
     },
     //事件监听-------------
     tabClick(index){
-      console.log(index);
+      // console.log(index);
       switch(index){
         case 0:
           this.currentType='pop'
@@ -109,13 +118,22 @@ export default {
           this.currentType='sell'
           break
       }
+      console.log(this.$refs.tabControl1.currentIndex);
+      console.log(this.$refs.tabControl2.currentIndex);
+
+      // this.$refs.tabControl1.currentIndex = index
+      // this.$refs.tabControl2.currentIndex = index
+
     },
     BacktopClick(){
       this.$refs.Bscroll.scrollTo(0,0)
     },
     scroll(position){
       // console.log(position.y);
+      //回到顶部
       this.backisShow= (-position.y) > 1500
+      //显示
+      this.tabFlexChange= (-position.y) > 312
     },
     pullingUp(){
       // console.log(123);
@@ -140,12 +158,19 @@ export default {
   padding-top: 44px;
 }
 .tab_control{
-  position: sticky;
-  top: 44px;
+  /* position: relative; */
+  /* top: 44px; */
 }
 .Bscroll{
   height: calc(100vh - 44px);
   overflow: hidden;
+  justify-content: space-around;
 
+}
+.tab_control2{
+  position: absolute;
+  width: 100%;
+  top: 43px;
+  z-index: 10;
 }
 </style>

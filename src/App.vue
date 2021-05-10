@@ -3,7 +3,7 @@
     <keep-alive exclude="detail">
     <router-view></router-view>
     </keep-alive>
-    <main-tar-bar></main-tar-bar>
+    <main-tar-bar v-if="showTar"></main-tar-bar>
   </div>
 </template>
 
@@ -13,9 +13,25 @@ import MainTarBar from 'components/content/mainTabbar/mainTabbar'
 
 export default {
   name: 'App',
+  data(){
+    return{
+      showTar:true,
+    }
+  },
   components: {
     MainTarBar
   },
+  updated(){
+    const path = this.$route.path.substr(0,7)
+    // console.log(path);
+    if(path == "/detail"){
+      console.log("获取detail");
+      this.showTar=false
+    }else{
+      this.showTar=true
+    }
+    // console.log(this.$route.path);
+  }
   
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <swiper>
+  <swiper class="detailSwiper">
       <swiper-item  v-for="(item,index) in SwiperImg " :key="index">
           <img :src="item" alt="">
       </swiper-item>
@@ -32,6 +32,9 @@ components:{
 }
 </script>
 
-<style>
-
+<style scoped>
+.detailSwiper{
+  height: 320px;
+  overflow-y: hidden;
+}
 </style>
