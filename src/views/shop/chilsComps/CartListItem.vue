@@ -1,9 +1,9 @@
 <template>
 <div>
-  <div id="shop-item" v-if="showitem">
-    <!-- <div class="item-selector">
+  <div id="shop-item" v-if="itemInfo.showitem">
+    <div class="item-selector">
       <CheckButton @checkBtnClick="checkedChange" v-model="itemInfo.checked"></CheckButton>
-    </div> -->
+    </div>
     <div class="item-img">
       <img :src="itemInfo.image" alt="商品图片">
     </div>
@@ -14,7 +14,7 @@
         <div class="item-price left">¥{{itemInfo.price}}</div>
         <div class="item-count right">
           <button class="conutBut" @click="conutClick(1)" >-</button>
-          {{itemInfo.conut}}
+          {{itemInfo.count}}
           <button class="conutBut" @click="conutClick(2)" >+</button>
           </div>
       </div>
@@ -25,20 +25,20 @@
 </template>
 
 <script>
-  // import CheckButton from './CheckButton'
+  import CheckButton from './CheckButton'
 // import {mapGetters} from "vuex"
   export default {
     name: "ShopCartItem",
     data(){
       return{
-        showitem:true
+        // showitem:true
       }
     },
     props: {
       itemInfo: Object
     },
     components: {
-      // CheckButton 
+      CheckButton 
     },
     created(){
       console.log(this.itemInfo);
@@ -57,19 +57,18 @@
       },
       conutClick(value){
         if(value==1){
-          // if(this.itemInfo.conut){
-          //   this.itemInfo.conut--
-          //   if(this.itemInfo.conut==0 ){
-          //     this.itemInfo.conut--
-          //     this.showitem=false
-          //   }
-          //   // console.log(123);
-          // }
-          if(this.itemInfo.conut){
-            this.$store.dispatch('subCart',this.showitem)
+          if(this.itemInfo.count){
+            this.itemInfo.count--
+            if(this.itemInfo.count==0){
+              // this.itemInfo.conut--
+              this.itemInfo.showitem=false
+              this.$store.dispatch('subCart',this.itemInfo.iid)
+
+            }
+            // console.log(123);
           }
         }else{
-          this.itemInfo.conut++
+          this.itemInfo.count++
         }
       }
     },

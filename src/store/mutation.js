@@ -5,9 +5,13 @@ import {
 
 export default {
     [ADD_COUNTER](state, payload) {
-        payload.conut++
+        payload.count++
     },
     [ADD_TO_CART](state, payload) {
+        payload.checked = true
+        payload.showitem = true
         state.cartList.push(payload)
-    }
+    },
+
+
 }

@@ -11,17 +11,21 @@ export default {
             // oldProduct.conut += 1
             context.commit(ADD_COUNTER, oldProduct)
         } else {
-            payload.conut = 1
+            payload.count = 1
                 // context.state.cartList.push(payload)
             context.commit(ADD_TO_CART, payload)
         }
 
     },
     subCart(context, payload) {
-        const subProduct = context.state.cartList.find(item => item.iid == payload.iid)
-        console.log(subProduct);
-        if (subProduct) {
-            payload.conut--
-        }
+        console.log(payload);
+        const subIndex = context.state.cartList.findIndex(item => item.iid === payload)
+        console.log(subIndex);
+        context.state.cartList.splice(subIndex, 1)
+            //     const subProduct = context.state.cartList.find(item => item.iid == payload.iid)
+            // console.log(subProduct);
+            // if (subProduct) {
+            //     payload.conut--
+            // }
     }
 }

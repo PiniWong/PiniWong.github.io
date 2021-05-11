@@ -5,7 +5,7 @@
       </nav-bar>
       <b-scroll ref="Bscroll" class="content" :probe-type="3">
         <cart-list></cart-list>
-        <div>{{lg}}</div>
+        <!-- <div>{{lg}}</div> -->
 
       </b-scroll>
 

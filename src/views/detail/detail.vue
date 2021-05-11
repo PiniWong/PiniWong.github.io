@@ -3,11 +3,11 @@
       <detail-nav ref="detailNav" @navClick='navClick' class="Detail_NavBar" :NaVitems="NaVitems"/>
       
       <b-scroll ref="Bscroll" :probeType="3" @scroll="scroll"  class="content"  >
-        <div>
+        <!-- <div>
           <li v-for="(item,index) in $store.state.cartList" :key="index">
               {{item}}
           </li>
-      </div>
+      </div> -->
             <detail-swiper class="Detail_swiper"  :SwiperImg='SwiperImg'></detail-swiper>
             <detail-base-info ref="detailInfo" :goods="goods" />
             <detail-shop-info :shop="shop" />
@@ -74,7 +74,7 @@ export default {
         // console.log(this.$route.params.iid);
         this.iid = this.$route.params.iid
         getDetail(this.iid).then(res=>{
-            console.log(res);
+            // console.log(res);
             const data = res.result
             this.SwiperImg=data.itemInfo.topImages
             // console.log(this.SwiperImg);
@@ -179,7 +179,7 @@ export default {
             product.desc = this.goods.desc;
             product.price = this.goods.price
             product.iid = this.iid
-            console.log(product);
+            // console.log(product);
             // this.$store.commit('addCart',product)
             // console.log(this.$store.state.cartList.length);
             this.$store.dispatch("addCart" , product)
