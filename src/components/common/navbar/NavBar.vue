@@ -1,7 +1,7 @@
 <template>
   <div class="Nav-bar">
       <div class="left"><slot  name="left"></slot></div>
-      <div class="center"><slot  name="center">购物街</slot></div>
+      <div class="center"><slot  name="center">MOMO</slot></div>
       <div class="right"><slot  name="right"></slot></div>
   </div>
 </template>

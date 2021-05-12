@@ -17,7 +17,7 @@
             <detail-recommend-list ref="detailRecommend" :goodsList="goodsList"></detail-recommend-list>
       </b-scroll>
       <back-top @click.native="BacktopClick" v-show="backisShow" />
-      <detail-bottom-bar @addToCart="addToCart"></detail-bottom-bar>
+      <detail-bottom-bar :iid='iid' @addToCart="addToCart"></detail-bottom-bar>
   </div>
 </template>
 
@@ -73,6 +73,7 @@ export default {
     created(){
         // console.log(this.$route.params.iid);
         this.iid = this.$route.params.iid
+        console.log(this.iid);
         getDetail(this.iid).then(res=>{
             // console.log(res);
             const data = res.result

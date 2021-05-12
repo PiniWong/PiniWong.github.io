@@ -3,7 +3,7 @@
     <keep-alive exclude="detail">
     <router-view></router-view>
     </keep-alive>
-    <main-tar-bar v-if="showTar"></main-tar-bar>
+    <main-tar-bar v-show="showTar"></main-tar-bar>
   </div>
 </template>
 
