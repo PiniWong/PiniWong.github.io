@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-    <keep-alive exclude="detail">
+    <keep-alive exclude="detail,shop">
     <router-view></router-view>
     </keep-alive>
     <main-tar-bar v-show="showTar"></main-tar-bar>

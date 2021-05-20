@@ -18,9 +18,10 @@ export default {
 
     },
     subCart(context, payload) {
-        console.log(payload);
+        // console.log(payload);
+        context.Proiid=payload
         const subIndex = context.state.cartList.findIndex(item => item.iid === payload)
-        console.log(subIndex);
+        // console.log(subIndex);
         context.state.cartList.splice(subIndex, 1)
             //     const subProduct = context.state.cartList.find(item => item.iid == payload.iid)
             // console.log(subProduct);

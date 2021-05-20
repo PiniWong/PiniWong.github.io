@@ -5,7 +5,7 @@ export default {
     cartList(state) {
         return state.cartList
     },
-    ItemIid(state) {
-        return state.cartList
-    }
+    // ItemIid(state) {
+    //     return state.cartList
+    // }
 }

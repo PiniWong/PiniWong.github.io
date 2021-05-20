@@ -61,9 +61,9 @@
             this.itemInfo.count--
             if(this.itemInfo.count==0){
               // this.itemInfo.conut--
+              // alert("确认删除该商品吗")
               this.itemInfo.showitem=false
               this.$store.dispatch('subCart',this.itemInfo.iid)
-
             }
             // console.log(123);
           }

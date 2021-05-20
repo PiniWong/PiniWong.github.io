@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     state: {
         cartList: [],
-        pl: ''
+        Proiid:'',
+        showTarbar:true
     },
     mutations,
     actions,
