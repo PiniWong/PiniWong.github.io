@@ -49,7 +49,7 @@ export default {
     //   console.log(222);
 
     // }
-    console.log(this.$route.query.iid);
+    // console.log(this.$route.query.iid);
     if(this.$route.query.iid!=undefined){
       // console.log(1);
       this.backshow=true

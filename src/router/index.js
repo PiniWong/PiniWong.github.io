@@ -3,11 +3,11 @@ import VueRouter from "vue-router"
 const Home = () =>
     import ('../views/home/home')
 const Category = () =>
-    import ('../views/category/category')
+    import ('../views/category/Category')
 const Shop = () =>
     import ('../views/shop/shop')
 const User = () =>
-    import ('../views/user/user')
+    import ('../views/user/Profile')
 const Detail = () =>
     import ('../views/detail/detail')
 

@@ -1,6 +1,6 @@
 <template>
   <div class="bottom-menu">
-    <CheckButton :value='isActiveAll' class="select-all" ></CheckButton>
+    <CheckButton :value='isActiveAll' @checkBtnClick="checkBtnClick" class="select-all" ></CheckButton>
     <span>全选</span>
     <span class="total-price">合计: ¥{{totalPrice}}</span>
     <span class="buy-product">去计算({{checkLength}})</span>
@@ -36,10 +36,29 @@
         return this.cartList.filter(item =>item.checked).length
       },
       isActiveAll(){
-        return !(this.cartList.filter(item => !item.checked).length)
-      }
+        // return !(this.cartList.filter(item => !item.checked).length)
+        // if(this.cartList.length==0) return false
+        //如果找到不选中的为true 然后再取反
+        // return !(this.cartList.find(item => !item.checked))
+        for(let item of this.cartList){
+          if(!item.checked){
+            return false
+          }
+        }
+        return true
+      },
+      
+      
     },
     methods: {
+      checkBtnClick(){
+        if(this.isActiveAll){
+          this.cartList.forEach(item => item.checked=false);
+        }else{
+          this.cartList.forEach(item => item.checked=true);
+        }
+        // this.isActiveAll = !this.isActiveAll
+      }
     }
   }
 </script>

@@ -11,8 +11,10 @@
     "@better-scroll/pull-up": "^2.0.0-beta.10",
     "axios": "^0.21.1",
     "better-scroll": "^2.3.0",
-    "core-js": "^3.6.5",
+    "core-js": "^2.6.12",
+    "fn": "^0.2.0",
     "git": "^0.1.5",
+    "promise": "^8.1.0",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2"

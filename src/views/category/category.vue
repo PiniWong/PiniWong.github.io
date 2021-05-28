@@ -1,7 +1,5 @@
 <template>
-  <div id="categoryBox">
-      <h2>分类</h2>
-  </div>
+  <div>123</div>
 </template>
 
 <script>

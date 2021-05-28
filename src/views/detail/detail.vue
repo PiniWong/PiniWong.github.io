@@ -18,6 +18,7 @@
       </b-scroll>
       <back-top @click.native="BacktopClick" v-show="backisShow" />
       <detail-bottom-bar  @addToCart="addToCart"></detail-bottom-bar>
+      <!-- <toast :msg="msg" :Toastshow='Toastshow'/> -->
   </div>
 </template>
 
@@ -35,6 +36,9 @@ import DetailRecommendList from "components/content/goods/goodslist"
 import { debounce } from "common/utils"
 import DetailBottomBar from "./childDetail/DetailBottomBar"
 import BackTop from "components/content/backtop/backtop"
+// import Toast from "components/common/toast/toast"
+
+import {mapActions} from "vuex"
 
 
 
@@ -51,7 +55,8 @@ export default {
         DetailRecommendList,
         DetailBottomBar,
         BScroll,
-        BackTop
+        BackTop,
+        // Toast
     },
     data(){
         return{
@@ -67,7 +72,8 @@ export default {
           NavScrollTop:[],
           currentIndex:"",
           backisShow:false,
-
+          msg:'',
+          Toastshow:null
         }
     },
     created(){
@@ -118,7 +124,7 @@ export default {
     mounted(){
         const refresh = debounce(this.$refs.Bscroll.refresh)
         this.$bus.$on("DetialimgUpload",()=>{
-            refresh()
+            refresh() 
         })
         
         //获取各组件的位置44
@@ -174,8 +180,11 @@ export default {
         }
 
         },
+        ...mapActions([
+            'addCart'
+        ]),
         addToCart(){
-            console.log('---');
+            // console.log('---');
             // 获取购物车需要的展示信息
             const product = {}
             product.image = this.SwiperImg[0];
@@ -186,7 +195,19 @@ export default {
             // console.log(product);
             // this.$store.commit('addCart',product)
             // console.log(this.$store.state.cartList.length);
-            this.$store.dispatch("addCart" , product)
+            // this.$store.dispatch("addCart" , product).then(res=>{
+            //     console.log(res);
+            // })
+            this.addCart(product).then(res=>{
+                console.log(res);
+                // this.msg=res
+                // this.Toastshow=true
+                // setTimeout(()=>{
+                //     this.Toastshow=false
+                //     this.msg=''
+                // },1500)
+                this.$toast.show(res,1500)
+            })
         },
         BacktopClick(){
             this.$refs.Bscroll.scrollTo(0,0)
